@@ -203,6 +203,15 @@ button[aria-pressed="true"] {
   color: #b9c8bd;
 }
 
+.dialog .dialog-note {
+  color: #b9c8bd;
+  font-size: 0.9rem;
+}
+
+.dialog a {
+  color: var(--accent);
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     --background: #e8efe9;
@@ -226,6 +235,10 @@ button[aria-pressed="true"] {
   }
 
   .slider-ticks {
+    color: #4a5c50;
+  }
+
+  .dialog .dialog-note {
     color: #4a5c50;
   }
 }

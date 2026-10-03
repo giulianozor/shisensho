@@ -38,6 +38,7 @@ import { BoardRenderer } from "../render/renderer";
 import { SoundPlayer } from "../render/sounds";
 import { TileSheet } from "../render/tileset";
 import {
+  openHelpDialog,
   openHighScoreDialog,
   openMessageDialog,
   openNameDialog,
@@ -618,22 +619,7 @@ export class Game {
     if (dialog === null) {
       return;
     }
-    const close = dialog.querySelector<HTMLButtonElement>("[data-action=close]");
-    if (close !== null) {
-      close.onclick = () => {
-        if (typeof dialog.close === "function") {
-          dialog.close();
-        } else {
-          dialog.removeAttribute("open");
-        }
-      };
-    }
-    if (typeof dialog.showModal === "function") {
-      dialog.showModal();
-    } else {
-      dialog.setAttribute("open", "");
-    }
-    dialog.focus();
+    openHelpDialog(dialog);
   }
 
   private async showSettingsDialog(): Promise<void> {

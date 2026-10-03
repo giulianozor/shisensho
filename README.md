@@ -4,6 +4,9 @@ A web port of [KShisen](https://apps.kde.org/kshisen), the Shisen-Sho
 Mahjongg game of the KDE Games project. It plays in a browser, needs no server
 and no installation, and works on a desktop as well as on a phone.
 
+Play the latest version of the game at
+<https://giulianozor.github.io/shisensho/>.
+
 The game follows the original rules: two tiles of the same kind can be removed
 when they are connected by a line that does not cross other tiles, tiles fall
 down when gravity is on, and a board is only dealt when it can be solved.
@@ -20,9 +23,10 @@ down when gravity is on, and a board is only dealt when it can be solved.
 - Click the hint button to have the game mark a pair that can be removed. If
   the pair needs a slide, the hint marks the tiles that slide first as well.
 - The toolbar holds new game, restart, undo, redo, hint, pause, sounds,
-  settings and high scores. The keyboard shortcuts are shown in the tooltips
+  settings, high scores and help. The help button (`F1`) opens a dialog that
+  explains the rules. The keyboard shortcuts are shown in the tooltips
   (`Ctrl+N`, `F5`, `Ctrl+Z`, `Ctrl+Shift+Z`, `Ctrl+H`, `Ctrl+P`, `Ctrl+,`,
-  `Ctrl+Shift+H`).
+  `Ctrl+Shift+H`, `F1`).
 - The high score of the finished game is asked for and stored in the browser.
   Settings and high scores are stored as well, so they survive a reload.
 
@@ -133,12 +137,18 @@ dialogs. Neither check needs access to the game itself.
 ## Differences to the original game
 
 - The game runs in a browser window instead of a desktop window, so it has no
-  system menu and no separate help window.
-- Only the `default` tile set and the `default` background are shipped. The
-  settings keep both names, but there is nothing to choose in the dialog yet.
-- The tile set, the background and the sounds are taken from the original game,
-  so the drawings and the sounds are the original ones. The sounds are shipped
-  as M4A, which Safari plays.
+  system menu. The help window of the original is a dialog in the page, opened
+  with the help button or with `F1`.
+- The keyboard shortcuts are fixed. They are listed in the tooltips of the
+  toolbar and in `SHORTCUTS`, but the settings dialog cannot change them.
+- A touch screen is supported: tapping selects a tile and holding it marks it,
+  which is what a right click does on a desktop.
+- The tile sets, the backgrounds and the sounds are taken from the original
+  game, so the drawings and the sounds are the original ones. All of them are
+  shipped and can be chosen in the settings. The sounds are shipped as M4A and
+  as OGG and the game picks the format the browser can play. A browser plays
+  no sound before the page has been touched, so the first sounds only come
+  after the first click.
 
 ## License
 

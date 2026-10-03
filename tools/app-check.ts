@@ -394,6 +394,28 @@ function position(position_: TilePos): string {
   return `${position_.x},${position_.y}`;
 }
 
+/**
+ * Waits until the canvas has the size the stylesheet gives it. The page appears
+ * as soon as its markup is parsed, which can be before its stylesheet is
+ * loaded, and a canvas that has no size in the layout yet has no width to
+ * measure the board with.
+ */
+async function waitForLayout(canvas: HTMLCanvasElement): Promise<void> {
+  let previous = "";
+  for (let attempt = 0; attempt < 300; ++attempt) {
+    await sleep(50);
+    const size = `${canvas.clientWidth}x${canvas.clientHeight}`;
+    const settled = size === previous && canvas.clientWidth > 0;
+    previous = size;
+    if (settled) {
+      return;
+    }
+  }
+  throw new Error(
+    `the canvas did not get its size, it is still ${canvas.clientWidth}x${canvas.clientHeight}`,
+  );
+}
+
 async function open(): Promise<Game> {
   const frame = document.querySelector<HTMLIFrameElement>("#app");
   if (frame === null) {
@@ -411,19 +433,18 @@ async function open(): Promise<Game> {
     errors.push(reason instanceof Error ? reason.message : "unknown error");
   });
 
-  let game: Game | null = null;
-  for (let attempt = 0; attempt < 300 && game === null; ++attempt) {
+  let canvas: HTMLCanvasElement | null = null;
+  for (let attempt = 0; attempt < 300 && canvas === null; ++attempt) {
     await sleep(50);
-    if (
-      gameWindow.document.querySelector<HTMLCanvasElement>("#board") !== null
-    ) {
-      game = new Game(gameWindow);
-    }
+    canvas = gameWindow.document.querySelector<HTMLCanvasElement>("#board");
   }
-  if (game === null) {
+  if (canvas === null) {
     throw new Error("the game did not start");
   }
-  return game;
+  // the board is measured against the size of the canvas, so the check has to
+  // wait for the layout as well, or it reads the board with the wrong geometry
+  await waitForLayout(canvas);
+  return new Game(gameWindow);
 }
 
 async function main(): Promise<void> {
@@ -630,6 +651,51 @@ async function main(): Promise<void> {
     "the dialog did not close",
   );
 
+  // the help dialog opens, explains how to play and closes
+  game.click("help");
+  await sleep(150);
+  const helpDialog = game.document.querySelector("#help-dialog");
+  expect(
+    "help",
+    helpDialog?.hasAttribute("open") === true,
+    "the dialog did not open",
+  );
+  expect(
+    "help",
+    (helpDialog?.querySelectorAll(".dialog-body p").length ?? 0) >= 3,
+    "the dialog does not explain how to play",
+  );
+  expect(
+    "help",
+    (helpDialog?.querySelectorAll('.dialog-body a[href^="https://"]').length ??
+      0) >= 2,
+    "the dialog does not link to the project",
+  );
+  game.document
+    .querySelector<HTMLButtonElement>('#help-dialog [data-action="close"]')
+    ?.click();
+  await sleep(150);
+  expect(
+    "help",
+    helpDialog?.hasAttribute("open") === false,
+    "the dialog did not close",
+  );
+
+  // the help dialog also opens with F1
+  game.window.dispatchEvent(
+    new KeyboardEvent("keydown", { key: "F1", bubbles: true }),
+  );
+  await sleep(150);
+  expect(
+    "help",
+    helpDialog?.hasAttribute("open") === true,
+    "F1 did not open the dialog",
+  );
+  game.document
+    .querySelector<HTMLButtonElement>('#help-dialog [data-action="close"]')
+    ?.click();
+  await sleep(150);
+
   // a new game shows a complete board again
   game.click("new-game");
   await sleep(300);
@@ -672,6 +738,8 @@ function layout(tiles: ReadonlyMap<TilePos, number>): string {
 }
 
 main().catch((error: unknown) => {
-  fail("script", error instanceof Error ? error.message : "unknown error");
+  // String() rather than a check for Error, so that a thrown DOMException, for
+  // example from an invalid selector, still says what it was
+  fail("script", error instanceof Error ? error.message : String(error));
   report();
 });

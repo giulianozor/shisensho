@@ -412,3 +412,16 @@ export function openMessageDialog(
   };
   show(dialog);
 }
+
+/**
+ * Opens the help dialog, which explains the rules. Its text is part of the page
+ * rather than of this module, so that it is readable without running the game.
+ */
+export function openHelpDialog(dialog: HTMLDialogElement): void {
+  const closeButton = element<HTMLButtonElement>(dialog, "[data-action=close]");
+  closeButton.onclick = () => {
+    close(dialog);
+  };
+  show(dialog);
+  closeButton.focus();
+}

@@ -54,7 +54,9 @@
         >
           Scores
         </button>
-        <button type="button" data-action="help" title="Help">Help</button>
+        <button type="button" data-action="help" title="How to Play (F1)">
+          Help
+        </button>
       </header>
 
       <main class="board-area">
@@ -102,14 +104,50 @@
       </div>
     </dialog>
 
-    <dialog id="help-dialog" class="dialog">
+    <dialog id="help-dialog" class="dialog" tabindex="-1">
       <h2 class="dialog-title">How to Play</h2>
       <div class="dialog-body">
-        <p>Click a tile, then click its matching pair to remove both.</p>
-        <p>Two tiles match if they are the same type. With Chinese style enabled (default), any flower matches any flower and any season matches any season.</p>
-        <p>Tiles can be connected if a straight line passes through empty space with at most two 90° turns (three straight segments). If "Tiles can slide" is enabled, sliding allows tiles to move into empty space so two lines (one corner) may be enough.</p>
-        <p>Right-click (or long press) to highlight matching tiles.</p>
-        <p>Use Hint to find a valid move. Use Undo/Redo to backtrack.</p>
+        <p>
+          The goal is to remove every tile of the board in pairs. Click a tile,
+          then its partner: both disappear and the tiles above them fall down if
+          Gravity is on.
+        </p>
+        <p>
+          Two tiles match when they are of the same kind. With Chinese style on,
+          which is the default, any flower matches any flower and any season
+          matches any season.
+        </p>
+        <p>
+          Two matching tiles can only be removed when they are connected by a
+          line that does not cross any other tile. The line may turn twice, so
+          it has three straight parts. Right click a tile to mark it: all tiles
+          of the same kind are then drawn marked, which makes the partner easy
+          to find. On a touch screen, hold the tile instead.
+        </p>
+        <p>
+          With Tiles can slide out of the way on, a tile standing in the way may
+          slide into the empty space at the end of its row or column, and two
+          matching tiles then only need a single corner to be connected. The
+          line that needs a slide is drawn dashed: the dashes are the part of
+          the way that has to be freed first.
+        </p>
+        <p>
+          If more than one way is possible, the game draws a line for each of
+          them: click on the one you prefer. The Hint button marks a pair that
+          can be removed right now.
+        </p>
+        <p>
+          Undo and Redo step through the moves, Pause stops the clock. A game
+          that ends without a single Undo or Hint is worth a place in the high
+          scores, which are kept in the browser.
+        </p>
+        <p class="dialog-note">
+          Shisen-sho is a port of
+          <a href="https://apps.kde.org/kshisen">KShisen</a> of the KDE Games
+          project. Its source code is on
+          <a href="https://github.com/giulianozor/shisensho">GitHub</a>, under
+          the GNU General Public License.
+        </p>
       </div>
       <div class="dialog-actions">
         <button type="button" data-action="close">Close</button>
