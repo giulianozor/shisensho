@@ -1,0 +1,15 @@
+# KShisen Web - serve the game on the network
+#
+# SPDX-FileCopyrightText: 2026 Giuliano Zorzi
+# SPDX-License-Identifier: GPL-2.0-or-later
+
+services:
+  kshisen:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: kshisen-web:latest
+    container_name: kshisen
+    ports:
+      - "${KSHISEN_PORT:-8080}:80"
+    restart: unless-stopped

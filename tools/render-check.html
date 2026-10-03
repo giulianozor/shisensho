@@ -1,0 +1,39 @@
+<!doctype html>
+<!--
+    Shisen-sho - a web port of KShisen, the KDE Shisen-Sho game
+    Renders the default tile set in a real browser and compares every tile with
+    a reference rendering, so the geometry and the rasterization can be checked
+    without looking at the screen.
+
+    SPDX-FileCopyrightText: 2016 Frederik Schwarzer <schwarzer@kde.org>
+
+    SPDX-FileCopyrightText: 2026 Giuliano Zorzi
+    SPDX-License-Identifier: GPL-2.0-or-later
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Shisen-sho render check</title>
+    <style>
+      body {
+        margin: 0;
+        background: #101010;
+        color: #eee;
+        font-family: sans-serif;
+      }
+      #board {
+        width: 900px;
+        height: 700px;
+      }
+      pre {
+        padding: 8px;
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="board"></canvas>
+    <pre id="out">running</pre>
+    <script type="module" src="./render-check.ts"></script>
+  </body>
+</html>

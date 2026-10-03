@@ -1,0 +1,41 @@
+<!doctype html>
+<!--
+    Shisen-sho - a web port of KShisen, the KDE Shisen-Sho game
+    Loads the game in a frame and plays it: the board has to show every tile in
+    pairs, a pair has to be removable, and the toolbar has to work.
+
+    Run it with "npm run check:app" and read the result in the page.
+
+    SPDX-FileCopyrightText: 2016 Frederik Schwarzer <schwarzer@kde.org>
+
+    SPDX-FileCopyrightText: 2026 Giuliano Zorzi
+    SPDX-License-Identifier: GPL-2.0-or-later
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Shisen-sho app check</title>
+    <style>
+      body {
+        margin: 0;
+        background: #101010;
+        color: #eee;
+        font-family: sans-serif;
+      }
+      iframe {
+        width: 900px;
+        height: 760px;
+        border: 0;
+      }
+      pre {
+        padding: 8px;
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <iframe id="app" src="/"></iframe>
+    <pre id="out">running</pre>
+    <script type="module" src="./app-check.ts"></script>
+  </body>
+</html>

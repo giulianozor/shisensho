@@ -1,0 +1,10 @@
+# KShisen Web - the build output and the tools
+node_modules/
+dist/
+*.local
+
+# Editor and system files
+.DS_Store
+*.swp
+.idea/
+.vscode/

@@ -1,0 +1,121 @@
+<!doctype html>
+<!--
+    Shisen-sho - a web port of KShisen, the KDE Shisen-Sho game
+
+    SPDX-FileCopyrightText: 2016 Frederik Schwarzer <schwarzer@kde.org>
+
+    SPDX-FileCopyrightText: 2026 Giuliano Zorzi
+    SPDX-License-Identifier: GPL-2.0-or-later
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark light" />
+    <title>Shisen-sho</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <div id="app">
+      <header class="toolbar" role="toolbar" aria-label="Game">
+        <button type="button" data-action="new-game" title="New Game (Ctrl+N)">
+          New
+        </button>
+        <button type="button" data-action="restart" title="Restart (F5)">
+          Restart
+        </button>
+        <button type="button" data-action="undo" title="Undo (Ctrl+Z)">Undo</button>
+        <button type="button" data-action="redo" title="Redo (Ctrl+Shift+Z)">Redo</button>
+        <button type="button" data-action="hint" title="Hint (Ctrl+H)">Hint</button>
+        <button
+          type="button"
+          data-action="pause"
+          title="Pause (Ctrl+P)"
+          aria-pressed="false"
+        >
+          Pause
+        </button>
+        <button
+          type="button"
+          data-action="sounds"
+          title="Play Sounds"
+          aria-pressed="true"
+        >
+          Sounds
+        </button>
+        <span class="spacer"></span>
+        <button type="button" data-action="settings" title="Settings (Ctrl+,)">
+          Settings
+        </button>
+        <button
+          type="button"
+          data-action="high-scores"
+          title="High Scores (Ctrl+Shift+H)"
+        >
+          Scores
+        </button>
+        <button type="button" data-action="help" title="Help">Help</button>
+      </header>
+
+      <main class="board-area">
+        <canvas id="board" aria-label="Game board"></canvas>
+      </main>
+
+      <footer class="statusbar">
+        <span id="tip" class="tip">Select a tile</span>
+        <span id="time" class="time">Your time: 00:00</span>
+        <span id="tiles" class="tiles">Removed: 0/0</span>
+        <span id="cheat" class="cheat" hidden>Cheat mode</span>
+      </footer>
+    </div>
+
+    <dialog id="settings-dialog" class="dialog" tabindex="-1">
+      <h2 class="dialog-title">Settings</h2>
+      <div class="dialog-body"></div>
+      <div class="dialog-actions">
+        <button type="button" data-action="cancel">Cancel</button>
+        <button type="button" data-action="confirm" formmethod="dialog">OK</button>
+      </div>
+    </dialog>
+
+    <dialog id="high-score-dialog" class="dialog">
+      <h2 class="dialog-title">High Scores</h2>
+      <div class="dialog-body"></div>
+      <div class="dialog-actions">
+        <button type="button" data-action="close">Close</button>
+      </div>
+    </dialog>
+
+    <dialog id="name-dialog" class="dialog">
+      <h2 class="dialog-title">Congratulations!</h2>
+      <div class="dialog-body"></div>
+      <div class="dialog-actions">
+        <button type="button" data-action="confirm">Save</button>
+      </div>
+    </dialog>
+
+    <dialog id="message-dialog" class="dialog">
+      <h2 class="dialog-title">End of Game</h2>
+      <div class="dialog-body"></div>
+      <div class="dialog-actions">
+        <button type="button" data-action="close">OK</button>
+      </div>
+    </dialog>
+
+    <dialog id="help-dialog" class="dialog">
+      <h2 class="dialog-title">How to Play</h2>
+      <div class="dialog-body">
+        <p>Click a tile, then click its matching pair to remove both.</p>
+        <p>Two tiles match if they are the same type. With Chinese style enabled (default), any flower matches any flower and any season matches any season.</p>
+        <p>Tiles can be connected if a straight line passes through empty space with at most two 90° turns (three straight segments). If "Tiles can slide" is enabled, sliding allows tiles to move into empty space so two lines (one corner) may be enough.</p>
+        <p>Right-click (or long press) to highlight matching tiles.</p>
+        <p>Use Hint to find a valid move. Use Undo/Redo to backtrack.</p>
+      </div>
+      <div class="dialog-actions">
+        <button type="button" data-action="close">Close</button>
+      </div>
+    </dialog>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

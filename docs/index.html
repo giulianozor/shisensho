@@ -1,0 +1,106 @@
+<!doctype html>
+<!--
+    Shisen-sho - a web port of KShisen, the KDE Shisen-Sho game
+
+    SPDX-FileCopyrightText: 2016 Frederik Schwarzer <schwarzer@kde.org>
+
+    SPDX-FileCopyrightText: 2026 Giuliano Zorzi
+    SPDX-License-Identifier: GPL-2.0-or-later
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark light" />
+    <title>Shisen-sho</title>
+    <script type="module" crossorigin src="./assets/index-sNTRcGJx.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-C6MNq1ih.css">
+  </head>
+  <body>
+    <div id="app">
+      <header class="toolbar" role="toolbar" aria-label="Game">
+        <button type="button" data-action="new-game" title="New Game (Ctrl+N)">
+          New
+        </button>
+        <button type="button" data-action="restart" title="Restart (F5)">
+          Restart
+        </button>
+        <button type="button" data-action="undo" title="Undo (Ctrl+Z)">Undo</button>
+        <button type="button" data-action="redo" title="Redo (Ctrl+Shift+Z)">Redo</button>
+        <button type="button" data-action="hint" title="Hint (Ctrl+H)">Hint</button>
+        <button
+          type="button"
+          data-action="pause"
+          title="Pause (Ctrl+P)"
+          aria-pressed="false"
+        >
+          Pause
+        </button>
+        <button
+          type="button"
+          data-action="sounds"
+          title="Play Sounds"
+          aria-pressed="true"
+        >
+          Sounds
+        </button>
+        <span class="spacer"></span>
+        <button type="button" data-action="settings" title="Settings (Ctrl+,)">
+          Settings
+        </button>
+        <button
+          type="button"
+          data-action="high-scores"
+          title="High Scores (Ctrl+Shift+H)"
+        >
+          Scores
+        </button>
+      </header>
+
+      <main class="board-area">
+        <canvas id="board" aria-label="Game board"></canvas>
+      </main>
+
+      <footer class="statusbar">
+        <span id="tip" class="tip">Select a tile</span>
+        <span id="time" class="time">Your time: 00:00</span>
+        <span id="tiles" class="tiles">Removed: 0/0</span>
+        <span id="cheat" class="cheat" hidden>Cheat mode</span>
+      </footer>
+    </div>
+
+    <dialog id="settings-dialog" class="dialog" tabindex="-1">
+      <h2 class="dialog-title">Settings</h2>
+      <div class="dialog-body"></div>
+      <div class="dialog-actions">
+        <button type="button" data-action="cancel">Cancel</button>
+        <button type="button" data-action="confirm" formmethod="dialog">OK</button>
+      </div>
+    </dialog>
+
+    <dialog id="high-score-dialog" class="dialog">
+      <h2 class="dialog-title">High Scores</h2>
+      <div class="dialog-body"></div>
+      <div class="dialog-actions">
+        <button type="button" data-action="close">Close</button>
+      </div>
+    </dialog>
+
+    <dialog id="name-dialog" class="dialog">
+      <h2 class="dialog-title">Congratulations!</h2>
+      <div class="dialog-body"></div>
+      <div class="dialog-actions">
+        <button type="button" data-action="confirm">Save</button>
+      </div>
+    </dialog>
+
+    <dialog id="message-dialog" class="dialog">
+      <h2 class="dialog-title">End of Game</h2>
+      <div class="dialog-body"></div>
+      <div class="dialog-actions">
+        <button type="button" data-action="close">OK</button>
+      </div>
+    </dialog>
+
+  </body>
+</html>

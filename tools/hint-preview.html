@@ -1,0 +1,23 @@
+<!doctype html>
+<!--
+    Shisen-sho - a web port of KShisen, the KDE Shisen-Sho game
+    Shows how the hint draws a move that needs tiles to slide.
+
+    SPDX-FileCopyrightText: 2026 Giuliano Zorzi
+    SPDX-License-Identifier: GPL-2.0-or-later
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>hint preview</title>
+    <style>
+      body { margin: 0; background: #101010; }
+      #board { width: 900px; height: 420px; }
+    </style>
+  </head>
+  <body>
+    <canvas id="board"></canvas>
+    <pre id="out">running</pre>
+    <script type="module" src="./hint-preview.ts"></script>
+  </body>
+</html>
