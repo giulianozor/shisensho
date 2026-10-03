@@ -92,6 +92,35 @@ button[aria-pressed="true"] {
   touch-action: manipulation;
 }
 
+.orientation-warning {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right)
+    env(safe-area-inset-bottom) env(safe-area-inset-left);
+  background: var(--background);
+  text-align: center;
+}
+
+.orientation-warning__content {
+  padding: 0 1rem;
+  font-size: clamp(1rem, 4vw, 1.5rem);
+  line-height: 1.5;
+}
+
+@media (orientation: portrait) {
+  .orientation-warning {
+    display: flex;
+  }
+
+  #app {
+    display: none;
+  }
+}
+
 .statusbar {
   display: flex;
   flex-wrap: wrap;
